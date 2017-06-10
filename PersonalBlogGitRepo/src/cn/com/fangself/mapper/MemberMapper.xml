@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.fangself.mapper.MemberMapper">
+	<insert id="insertAMember" parameterType="cn.com.fangself.dao.Member">
+		insert into tb_Member (memberuuid,username,userpwd,email,phonenum, sex,realname, address,postcode) 
+		values(#{memberuuid},#{username},#{userpwd},#{email},#{phonenum}, #{sex},#{realname}, #{address},#{postcode})
+		<selectKey resultType="java.lang.Integer" keyProperty="memberid">
+			select LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+</mapper>
