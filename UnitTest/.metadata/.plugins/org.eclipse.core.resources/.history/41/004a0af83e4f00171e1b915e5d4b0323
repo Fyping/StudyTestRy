@@ -1,0 +1,18 @@
+package cn.com.fangself.test;
+
+public class MainTestClass {
+
+	static{
+		System.out.println("helloworld static block !!!!");
+	}
+	public static void main(String[] args) {
+		System.out.println("abcdefghijklmnlpqrstuvwxyz");
+	}
+	static{
+		System.out.println("helloworld static block !!!! afterhellolololl");
+	}
+	static{
+		final int a=100;
+		
+	}
+}

@@ -1,0 +1,36 @@
+package cn.com.fangself.web;
+
+import java.util.List;
+import cn.com.fangself.web.ImportExcelToGoodsObj;
+import cn.com.fangself.web.Goods;
+public class StringToJson {
+	/**
+	 * parse into json
+	 * **/
+
+	public static String strToJson(String filePath){
+		List<Goods> goodsList = ImportExcelToGoodsObj.getAllByExcel(filePath);
+		String jsonStr = new String();
+		jsonStr="{\"commodities\":[";
+		for(int i=0;i<goodsList.size();i++){
+			String id = (goodsList.get(i).getId());
+			String name = goodsList.get(i).getName();
+			String price = String.valueOf((goodsList.get(i).getPrice()));
+			id="{\"name\":"+"\""+id+"\",";
+			name="\"price\":"+"\""+name+"\",";
+			price="\"id\":"+"\""+price+"\"}";
+			jsonStr+=id+name+price;
+			if(i!=goodsList.size()-1){
+				jsonStr+=",";
+			}
+		}
+		jsonStr+="]}";
+		return jsonStr;
+		//System.out.println(jsonStr);
+	}
+	/*public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String jsonStringToJson.strToJson("goods.xls");
+	}*/
+
+}

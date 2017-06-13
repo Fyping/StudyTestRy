@@ -1,0 +1,35 @@
+package cn.com.fangself.test;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class BroswerDirectory {
+
+	static File[] browser(File fileDir){
+		
+		File[] files = fileDir.listFiles();
+		if(files==null){
+			return null;
+		}
+		ArrayList<File> fileResultArray = new ArrayList<File>();
+		for(int i=0;files!=null&&i<files.length;i++){
+			if(files[i].isDirectory()){
+				fileResultArray.add(files[i]);
+				browser(files[i]);
+			}
+		}
+		File[] result = new File[fileResultArray.size()];
+		for(int i=0;i<fileResultArray.size();i++){
+			result[i] = fileResultArray.get(i);
+		}
+		return result;
+	}
+	
+	public static void main(String[] args) {
+		File fileDir = new File("/");
+		File [] result = BroswerDirectory.browser(fileDir);
+		for(int i=0;i<result.length;i++){
+			System.out.println(result[i].getPath());
+		}
+	}
+}
