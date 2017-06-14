@@ -1,0 +1,78 @@
+package cn.com.fangself.web;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import cn.com.fangself.web.Goods;
+import jxl.Sheet;
+import jxl.Workbook;
+
+public class ImportExcelToGoodsObj {
+
+	public static HashMap<Integer,Goods> getAllByExcel(String file){
+		HashMap<Integer,Goods> list=new HashMap<Integer,Goods>();
+        try {
+        	File files  = new File(file);
+            Workbook rwb=Workbook.getWorkbook(files);
+           Sheet rs = rwb.getSheet(0);
+           int cols=rs.getColumns();//得到所有的列
+            int rows=rs.getRows();//得到所有的行            
+            //System.out.println(cols+" rows:"+rows);
+             for (int i = 1; i < rows; i++) {
+            	 Goods good = new Goods();
+                for (int j = 0; j < cols; j++) {
+                	String custom_id = rs.getCell(j,i).getContents();
+                	switch(j){
+                	case 0:{
+                			System.out.println("商户号"+custom_id);
+                			good.setId(custom_id);
+                			break;
+                			//good.setId(custom_id);
+                	}
+                	case 1:{
+                			System.out.println("商品名"+custom_id);
+                			good.setName(custom_id);
+                			break;
+                		   }
+                	case 2:{
+                			System.out.println("单价"+custom_id);
+                			good.setPrice(Integer.parseInt(custom_id));
+                			break;
+                		   }
+                		
+                	//case 3:System.out.println("商户号     ——"+custom_id.getClass().getSuperclass().getName());break;
+                		
+                	}
+                	
+                }
+                list.keySet();
+                list.put(good.hashCode(),good);
+                //list.add(good);
+              // System.out.println();
+             }    /*       
+                    //list.add(new Goods(Integer.parseInt(id), name, sex, Integer.parseInt(num)));
+                }
+            }
+        */} catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        return list;
+        
+    }
+/*	public static void main(String[] args) throws FileNotFoundException {
+		try {
+			
+			List<Goods> temp = ImportExcelToGoodsObj.getAllByExcel("goods.xls".trim());
+			System.out.println("temp size if "+temp.size());
+			for(int i=0;i<temp.size();i++){
+				System.out.println(temp.get(i).getName());
+			}
+		} catch(Exception g){
+			System.out.println("Exception in importing !!!");
+		}
+	}*/
+}

@@ -1,0 +1,41 @@
+package cn.com.fangself.web;
+
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import cn.com.fangself.web.StringToJson;
+
+public class ChJsonStrIntoFile {
+	private static String jsonFilePath = "D:\\Temporary\\rubbish\\hello.json";
+	public static void chJsonStrTOFile(String jsonStr){
+		//String jsonStr = StringToJson.strToJson(filepath);
+        File file = new File(jsonFilePath);// 指定要写入的文件  
+       if (!file.exists()) {// 如果文件不存在则创建  
+           try {
+			file.createNewFile();
+		} catch (IOException e) {  
+			// TODO Auto-generated       catch block
+			e.printStackTrace();
+		}  
+       }  
+       // 获取该文件的缓冲输出流  
+       try{
+	       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));  
+	       // 写入信息  
+	       bufferedWriter.write(jsonStr);  
+	       bufferedWriter.newLine();// 表示换行  
+	       bufferedWriter.flush();// 清空缓冲区  
+	       bufferedWriter.close();// 关闭输出流  
+       }catch(Exception e){
+    	   
+       }
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//ChJsonStrIntoFile.chJsonStrTOFile("abcdefg.json");
+	}
+
+}
