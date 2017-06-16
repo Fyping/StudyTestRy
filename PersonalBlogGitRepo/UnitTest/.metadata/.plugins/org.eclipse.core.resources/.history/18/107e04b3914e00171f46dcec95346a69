@@ -1,0 +1,38 @@
+package cn.com.fangself.test;
+
+/**
+ * 业务：
+ * student1 、student2 teacher 
+ * student1准备睡10分钟再继续上课，teacher喊三声上课之后吵醒student1,student1 吵醒student2
+ * 
+ * **/
+public class StudentSleepThread extends Thread {
+
+	Thread attachThread = null;
+	public StudentSleepThread(Thread attachThread){
+		this.attachThread = attachThread;
+	}
+	
+	public void run(){
+		
+		if(Thread.currentThread().getName().equals("teacher")){
+			System.out.println("上课");
+			this.attachThread.interrupt();
+		}else if(Thread.currentThread().getName().equals("student1")){
+			System.out.println("先谁10分钟");
+			try {
+				this.sleep(1000*60*10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}else if(Thread.currentThread().getName().equals("student2")){
+			System.out.println("我本来就睡着了");
+				try {
+					this.sleep(1000*60*10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+	
+}

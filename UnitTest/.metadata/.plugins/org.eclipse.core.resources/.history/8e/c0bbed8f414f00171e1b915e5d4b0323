@@ -1,0 +1,31 @@
+package cn.com.fangself.test;
+
+class Base{
+    static int a=100;
+	static {
+    	System.out.println("Base static block");
+    }
+	public Base(){
+		System.out.println("Base constructor method execute");
+	}
+	static int b = 1000;
+	
+}
+class As extends Base{
+	static int c = 100;
+	static {
+		System.out.println("child class static block ");
+	}
+	static int d = 1000;
+	public As(){
+		System.out.println("Class A constructor executed");
+	}
+	static int e = 100;
+}
+
+public class TestStaticClass {
+	//关于子类和父类的静态代码块，非静态代码块、静态变量的执行顺序问题
+	static{
+		new As();
+	}
+}

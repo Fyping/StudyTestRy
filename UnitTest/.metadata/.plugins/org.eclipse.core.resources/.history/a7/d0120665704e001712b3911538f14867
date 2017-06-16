@@ -1,0 +1,35 @@
+package cn.com.fangself.test;
+
+public class MultipleThread {
+
+	//  模拟三只小狗抢食物
+	class Food{
+		int counitity;
+		public Food(int countity ){
+			this.counitity = countity;
+		}
+		public int getCounitity(){
+			return this.counitity;
+		}
+		public void lostCountity(int count){
+			this.counitity -=count;
+		}
+	}
+	public class Dog implements Runnable{
+		String dogName = null;
+		Food food = null;
+		public Dog(Food food, String name){
+			this.dogName = name;
+			this.food = food;
+		}
+		public void run(){
+			int foodCount = 2;
+			System.out.println(this.dogName + "  eat " + foodCount);
+			this.food.lostCountity(foodCount);
+			
+		}
+	}
+	public static void main(String[] args) {
+		
+	}
+}

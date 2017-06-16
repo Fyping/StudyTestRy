@@ -3,8 +3,10 @@ package cn.com.fangself.dao;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +20,7 @@ public class SqlSessionManager {
 
 	String resource = "mybatis-config.xml";
 	
-	SqlSessionFactory sqlSessionFactory = null;
+	public SqlSessionFactory sqlSessionFactory = null;
 	
 	public SqlSessionManager(){
 		try {
@@ -46,10 +48,8 @@ public class SqlSessionManager {
 		sqlsession.close();
 		return result;
 	}
-	private Message fillMemberEntryThenReturnMessage(String names ,String value , Member member){
-		Message message = new Message();
-		String messtr = new String("并没有留下什么");
-		message.setMsg(messtr);
+	private void fillMemberEntryThenReturnMessage(Message message,String names ,String value , Member member){
+		String messtr = null;
 		switch(names){
 		case "memberuuid":{
 				if(value==null){value="null";}else{
@@ -108,35 +108,44 @@ public class SqlSessionManager {
 			}
 		case "message":{ 
 			System.out.println("value ==="+ value);
-			
 			messtr =new String(value);
+			message.setMsg(messtr);
 		 break;}
 		default:{break;}
 		}
-		message.setMsg(messtr);
-		return message;
 	}
-	public void insertAMemberAndMessage(HashMap<String,String> memberHash){
+	public void insertAMemberAndMessage(Hashtable<String,String> memberHash){
 		Member member = new Member();
-		Message message =null;
+		Message message =new Message();
 		SqlSession sqlsession = this.sqlSessionFactory.openSession();
 		sqlsession.getMapper(UserMapper.class);
-		for(java.util.Iterator<Entry<String, String>> it = memberHash.entrySet().iterator();it.hasNext();){
+		for(java.util.Iterator<Entry<String, String>> it = memberHash.entrySet().iterator();;){
 			Map.Entry<String, String> entry = it.next();
 			String names = entry.getKey();
 			String value = entry.getValue();
+			try {
+				value = new String(value.getBytes("ISO-8859-1"),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+			}
 			if(names==null||names.equals("")){
 				throw new RuntimeException();
 			}
-			message = this.fillMemberEntryThenReturnMessage(names, value, member);
+			this.fillMemberEntryThenReturnMessage(message,names, value, member);
+			if(!it.hasNext()){
+				break;
+			}
 		}
-			member.setMemberuuid("uuid");
-			member.setPhonenum("10");
-			member.setPostcode("123456");
-		System.out.println(member);
+		
+		UUID uuid = UUID.randomUUID();
+		member.setMemberuuid(uuid.toString());
+		if(member.getPhonenum()==null)member.setPhonenum("000-000-000");
+		if(member.getUsername()==null)member.setUsername("未命名");
+		if(member.getUserpwd()==null)member.setUserpwd("none");
+		if(member.getEmail()==null)member.setEmail("---111-000-111-000@110.com---");
+		if(message.getMsg()==null)message.setMsg("并没有留下什么");
 		Integer memberID = sqlsession.insert("insertAMember",member);
+		//System.out.println(member);
 		message.setMemberid(memberID);
-		System.out.println(message);
 		sqlsession.insert("insertAMessage",message);
 		sqlsession.commit();
 		sqlsession.clearCache();

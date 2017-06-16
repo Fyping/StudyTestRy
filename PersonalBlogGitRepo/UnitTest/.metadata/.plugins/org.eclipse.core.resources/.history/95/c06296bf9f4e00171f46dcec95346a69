@@ -1,0 +1,9 @@
+package cn.com.fangself.test;
+
+import java.net.*;
+
+public class URLTestClass {
+
+	public static void main(String []args){
+	}
+}

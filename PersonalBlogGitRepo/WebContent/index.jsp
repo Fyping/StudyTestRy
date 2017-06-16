@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 <!--移动端菜单-->
 <jsp:include page="header.jsp" />
 <% Integer timeOfVisit = (Integer)request.getAttribute("timesOfVisit"); %>
-您是第<%=timeOfVisit %>个访问者!谢谢您的访问</br>
+
 <!--除菜单外所有-->
 <div class="content-wrap">
 	<div class="banner">
@@ -17,6 +17,7 @@ pageEncoding="UTF-8"%>
 		<img class="bannerImg" src="images/banner.jpg" alt="banner">
 		<div class="header container">
 			<!--personInfo-->
+			<div id="bannervisiter" >您是第<%=timeOfVisit %>位来访者<br>感谢您的来访！</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="personInfo">

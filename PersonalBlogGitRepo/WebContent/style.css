@@ -85,10 +85,18 @@ header
 	width: 100%;
 	height: 420px;
 }
+#bannervisiter{
+	
+	width:20%;
+	height:20px;
+	float:right;
+	color:#26294d;
+}
 .bannerImg{
 	width: 100%;
-	height:420px;
+	height:400px;
 }
+
 .header{
 	position: absolute;
 	top: 30px;

@@ -45,6 +45,6 @@ FOR EACH ROW
 insert into tb_Message (cartuuid,memberid)values(new.memberuuid,memberid);
 
 insert into tb_User(uip)values('127.0.0.1');
-insert into tb_Member(cartuuid,memberid) values("fypinguuid",1);
-insert into tb_Message(memberid,msg)values(1,'第一条浏览记录');
+insert into tb_Member(memberuuid,memberid) values("fypinguuid",1);
+insert into tb_Message(memberid,msg)values(1,'The first message');
 

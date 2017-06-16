@@ -9,34 +9,9 @@ pageEncoding="UTF-8"%>
 <!--移动端菜单-->
 <jsp:include page="header.jsp" />
 
-<!--除菜单外所有-->
-<div class="content-wrap">
-	<div class="banner">
-		<button class="menu-button" id="open-button">Open Menu</button>
-		<img class="bannerImg" src="images/banner.jpg" alt="banner">
-		<div class="header container">
-			<!--personInfo-->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="personInfo">
-						<div class="logo">
-							<a href="index.html"><img src="images/logo.jpg" alt="logo"></a>
-						</div>
-						<div class="logoTheme">
-							<h1>专注于Java开发</h1>
-							<h3>写出改变世界的代码</h3>
-						</div>
-					</div>				
-				</div>
-			</div>
-		</div> 
-	</div>
 
-
-	<!--文章列表-->
 	
-	<DIV style="width:100%;height:120%;border:1px red solid;">
-	
+<DIV style="width:100%;height:120%;border:1px red solid;">
 <form action="SubmitMessage" method="POST" class="form-horizontal" role="form">
 	<div class="form-group">
 	<table style="width:80%;float:left;text-align:center;margin-top:5%">
@@ -50,7 +25,7 @@ pageEncoding="UTF-8"%>
 		<td>Email:</td><td><input type="text" class="form-control" style ="color:gray;" name="email" value="选填" /><br></td>
 		</tr>
 		<tr>
-		<td>姓名:</td><td><input type="text"  class="form-control" style ="color:gray;" name="realname" value="选填"/><br></td>
+		<td>电话:</td><td><input type="text"  class="form-control" style ="color:gray;" name="phonenum" value="选填"/><br></td>
 		</tr>
 		<tr>
 		<td>地址:</td><td><input type="text" class="form-control" style ="color:gray;" name="address" value="选填"/><br></td>
